@@ -2,6 +2,9 @@ package com.learning.springbootproject.controller;
 
 import com.learning.springbootproject.documents.Department;
 import com.learning.springbootproject.service.DepartmentService;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,15 +26,24 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    /* Log messages from RestController methods which is
+     * useful for debugging purposes. */
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+
     /* @RequestBody means that the department variable will
-     * be transformed into a JSON object  */
+     * be transformed into a JSON object
+     *
+     * @Valid will validate the Department parameter using
+     * the annotations we provided in the Department class.  */
     @PostMapping("/departments")
-    public Department saveDepartment(@RequestBody Department department) {
+    public Department saveDepartment(@Valid @RequestBody Department department) {
+        LOGGER.info("Inside saveDepartment method of DepartmentController");
         return departmentService.saveDepartment(department);
     }
 
     @GetMapping("/departments")
     public List<Department> getDepartmentList() {
+        LOGGER.info("Inside getDepartmentList method of DepartmentController");
         return departmentService.getDepartmentList();
     }
 

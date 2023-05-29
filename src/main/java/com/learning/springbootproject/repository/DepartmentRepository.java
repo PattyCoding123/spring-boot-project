@@ -19,17 +19,33 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DepartmentRepository extends MongoRepository<Department, String> {
     /* Since findByDepartmentName is not a part of the MongoRepository,
-    * we need to declare it ourselves.
-    *
-    * For defining our own query methods, we must write the name
-    * with camel casing and follow the "findBy{FIELD}" convention.
-    * This ensures that the MongoRepository knows what field
-    * to filter the query with.
-    * */
+     * we need to declare it ourselves.
+     *
+     * For defining our own query methods, we must write the name
+     * with camel casing and follow the "findBy{FIELD}" convention.
+     * This ensures that the MongoRepository knows what field
+     * to filter the query with.
+     * */
 
-    @Query("{'departmentName': ?0}")
+    /*
+     * The @Query annotation is applied at the method-level
+     * in MongoRepository interfaces, and pertains to a single method.
+     *
+     * For MongoDB JSON queries, each query starts with curly braces
+     * and follows the format:
+     * {
+     *  key: ?NUM
+     * }
+     * The ?NUM refers to the argument position for mapping the function's
+     * parameters to the values in the query.
+     *
+     * To include more options for a particular field, you must surround
+     * them with more curly braces. Additionally, you must also attach $
+     * at the start of operators.
+     *  */
+    @Query(value = "{'departmentName': ?0}")
     Department findByDepartmentName(String departmentName);
 
-//    @Query("{'departmentName': ?0}")
+    @Query(value = "{'departmentName': {$regex: ?0, $options: 'i'}")
     Department findByDepartmentNameIgnoreCase(String departmentName);
 }

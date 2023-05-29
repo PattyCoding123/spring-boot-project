@@ -1,5 +1,6 @@
 package com.learning.springbootproject.documents;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +13,24 @@ public class Department {
     @Id
     private String departmentId;
 
+    /*
+    * Using the Spring Boot Validator dependency, we have made
+    * the departmentName a required field with the @NotBlank annotation.
+    *
+    * There's also:
+    * @Length(max, min)
+    * @Size(max, min)
+    * @Email
+    * @Positive
+    * @Negative
+    * @PositiveOrZero
+    * @NegativeOrZero
+    * @Future
+    * @Present
+    * @Past
+    * @PastOrPresent
+    *  */
+    @NotBlank(message = "Please Add Department Name")
     private String departmentName;
     private String departmentAddress;
     private String departmentCode;
