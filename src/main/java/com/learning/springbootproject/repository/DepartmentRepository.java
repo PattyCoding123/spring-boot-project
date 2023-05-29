@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /*
  * The API implementation happens in the repository.
  * It acts as a link between the model and the database and has
@@ -44,8 +46,8 @@ public interface DepartmentRepository extends MongoRepository<Department, String
      * at the start of operators.
      *  */
     @Query(value = "{'departmentName': ?0}")
-    Department findByDepartmentName(String departmentName);
+    Optional<Department> findByDepartmentName(String departmentName);
 
     @Query(value = "{'departmentName': {$regex: ?0, $options: 'i'}")
-    Department findByDepartmentNameIgnoreCase(String departmentName);
+    Optional<Department> findByDepartmentNameIgnoreCase(String departmentName);
 }

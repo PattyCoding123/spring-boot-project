@@ -1,6 +1,7 @@
 package com.learning.springbootproject.service;
 
 import com.learning.springbootproject.documents.Department;
+import com.learning.springbootproject.errors.DepartmentNotFoundException;
 
 import java.util.List;
 
@@ -17,11 +18,11 @@ public interface DepartmentService {
 
     List<Department> getDepartmentList();
 
-    Department getDepartmentById(String departmentId);
+    Department getDepartmentById(String departmentId) throws DepartmentNotFoundException;
 
     void deleteDepartmentById(String departmentId);
 
-    Department updateDepartment(String departmentId, Department department);
+    Department updateDepartment(String departmentId, Department department) throws DepartmentNotFoundException;
 
-    Department getDepartmentByName(String departmentName);
+    Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException;
 }

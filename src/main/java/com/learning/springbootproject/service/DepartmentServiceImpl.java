@@ -1,12 +1,14 @@
 package com.learning.springbootproject.service;
 
 import com.learning.springbootproject.documents.Department;
+import com.learning.springbootproject.errors.DepartmentNotFoundException;
 import com.learning.springbootproject.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -32,8 +34,12 @@ public class DepartmentServiceImpl implements DepartmentService {
      * exists, but we can go straight to getting its reference
      * with the get() for the Optional type. */
     @Override
-    public Department getDepartmentById(String departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department getDepartmentById(String departmentId) throws DepartmentNotFoundException {
+       Optional<Department> department = departmentRepository.findById(departmentId);
+        if (department.isEmpty()) {
+            throw new DepartmentNotFoundException("Department not available");
+        }
+        return department.get();
     }
 
     @Override
@@ -42,9 +48,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department updateDepartment(String departmentId, Department department) {
-        Department depDb = departmentRepository.findById(departmentId).get();
+    public Department updateDepartment(String departmentId, Department department) throws DepartmentNotFoundException {
+        Optional<Department> potentialDepDb = departmentRepository.findById(departmentId);
 
+        if(potentialDepDb.isEmpty()) {
+            throw new DepartmentNotFoundException("The department you want to exist does not exist.");
+        }
+
+        Department depDb = potentialDepDb.get();
         // Checks to make sure a field exists and is NOT empty.
         if (Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())) {
             depDb.setDepartmentName(department.getDepartmentName());
@@ -63,7 +74,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentByName(String departmentName) {
-        return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+    public Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException {
+        Optional<Department> department = departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+        if(department.isEmpty()) {
+            throw new DepartmentNotFoundException("The department does not exist");
+        }
+        return department.get();
     }
 }

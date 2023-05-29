@@ -19,12 +19,16 @@ repositories {
 *
 * Dependency versions will be based on our Parent (Spring Boot Application)
 * version.
+*
+* Lombok is a Java annotation library that is used to reduce Boilerplate code.
 * */
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

@@ -1,6 +1,7 @@
 package com.learning.springbootproject.controller;
 
 import com.learning.springbootproject.documents.Department;
+import com.learning.springbootproject.errors.DepartmentNotFoundException;
 import com.learning.springbootproject.service.DepartmentService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -57,7 +58,8 @@ public class DepartmentController {
      * In this example, we would do @PathVariable("id").
      * */
     @GetMapping("/departments/{id}")
-    public Department getDepartmentById(@PathVariable("id") String departmentId) {
+    public Department getDepartmentById(@PathVariable("id") String departmentId)
+            throws DepartmentNotFoundException {
         return departmentService.getDepartmentById(departmentId);
     }
 
@@ -68,12 +70,14 @@ public class DepartmentController {
     }
 
     @PutMapping("/departments/{id}")
-    public Department updateDepartment(@PathVariable("id") String departmentId, @RequestBody Department department) {
+    public Department updateDepartment(@PathVariable("id") String departmentId, @RequestBody Department department)
+            throws DepartmentNotFoundException {
         return departmentService.updateDepartment(departmentId, department);
     }
 
     @GetMapping("/departments/name/{name}")
-    public Department getDepartmentByName(@PathVariable("name") String departmentName) {
+    public Department getDepartmentByName(@PathVariable("name") String departmentName)
+            throws DepartmentNotFoundException {
         return departmentService.getDepartmentByName(departmentName);
     }
 }
