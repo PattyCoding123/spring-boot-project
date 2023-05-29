@@ -27,10 +27,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     /* Since there is a chance that no document exists with the
-    * input departmentId, the findById function will return an
-    * Optional<Department>. It is best to check if the object
-    * exists, but we can go straight to getting its reference
-    * with the get() for the Optional type. */
+     * input departmentId, the findById function will return an
+     * Optional<Department>. It is best to check if the object
+     * exists, but we can go straight to getting its reference
+     * with the get() for the Optional type. */
     @Override
     public Department getDepartmentById(String departmentId) {
         return departmentRepository.findById(departmentId).get();
@@ -46,21 +46,24 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department depDb = departmentRepository.findById(departmentId).get();
 
         // Checks to make sure a field exists and is NOT empty.
-        if(Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())) {
+        if (Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())) {
             depDb.setDepartmentName(department.getDepartmentName());
         }
-        if(Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())) {
+        if (Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())) {
             depDb.setDepartmentAddress(department.getDepartmentAddress());
         }
-        if(Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())) {
+        if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())) {
             depDb.setDepartmentCode(department.getDepartmentCode());
         }
 
+        /* Save method will save the changes made to a
+         * particular department in MongoDB and return
+         * the java representation */
         return departmentRepository.save(depDb);
     }
 
     @Override
     public Department getDepartmentByName(String departmentName) {
-        return departmentRepository.findByDepartmentName(departmentName);
+        return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
     }
 }

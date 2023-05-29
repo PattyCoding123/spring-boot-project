@@ -2,6 +2,7 @@ package com.learning.springbootproject.repository;
 
 import com.learning.springbootproject.documents.Department;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /*
@@ -25,5 +26,10 @@ public interface DepartmentRepository extends MongoRepository<Department, String
     * This ensures that the MongoRepository knows what field
     * to filter the query with.
     * */
+
+    @Query("{'departmentName': ?0}")
     Department findByDepartmentName(String departmentName);
+
+//    @Query("{'departmentName': ?0}")
+    Department findByDepartmentNameIgnoreCase(String departmentName);
 }

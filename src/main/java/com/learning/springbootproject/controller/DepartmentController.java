@@ -11,8 +11,15 @@ import java.util.List;
 public class DepartmentController {
     /* Spring takes control and injects the DepartmentService
      * object automatically for this reference. This way, we
-     * don't need to create a reference using the "new" keyword. */
-
+     * don't need to create a reference using the "new" keyword.
+     *
+     * It knows what classes are Service components
+     * due to the @Service annotation over the class declaration.
+     *
+     * The type of DepartmentService however comes from the
+     * Interface since Service classes can have multiple
+     * implementations.
+     * */
     @Autowired
     private DepartmentService departmentService;
 
