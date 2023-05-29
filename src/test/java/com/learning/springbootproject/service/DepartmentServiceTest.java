@@ -45,7 +45,6 @@ class DepartmentServiceTest {
 
         Department found = departmentService.getDepartmentByName("IT");
 
-        System.out.println(found.getDepartmentName());
         assertEquals(departmentName, found.getDepartmentName());
     }
 }
