@@ -45,9 +45,9 @@ public interface DepartmentRepository extends MongoRepository<Department, String
      * them with more curly braces. Additionally, you must also attach $
      * at the start of operators.
      *  */
-    @Query(value = "{'departmentName': ?0}")
+    // @Query(value = "{'departmentName': ?0}")
     Optional<Department> findByDepartmentName(String departmentName);
 
-    @Query(value = "{'departmentName': {$regex: ?0, $options: 'i'}")
+    // @Query(value = "{'departmentName': {$regex: ?0, $options: 'i'}")
     Optional<Department> findByDepartmentNameIgnoreCase(String departmentName);
 }
