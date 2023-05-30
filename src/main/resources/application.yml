@@ -1,8 +1,43 @@
-welcome:
-  message: Hello, World! I am using a yaml file!
+spring:
+  profiles:
+    active: dev
+
+---
 
 spring:
+  config:
+    activate:
+      on-profile: dev
   data:
     mongodb:
       uri: ${MONGO_DATABASE_URI}
       database: ${MONGO_DATABASE_NAME}
+welcome:
+  message: Hello, World! I am using a yaml file in dev mode!
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  data:
+    mongodb:
+      uri: ${MONGO_DATABASE_URI}
+      database: ${MONGO_DATABASE_NAME}
+welcome:
+  message: Hello, World! I am using a yaml file in test mode!
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: qa
+  data:
+    mongodb:
+      uri: ${MONGO_DATABASE_URI}
+      database: ${MONGO_DATABASE_NAME}
+welcome:
+  message: Hello, World! I am using a yaml file in qa mode!
+
