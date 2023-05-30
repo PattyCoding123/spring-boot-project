@@ -2,7 +2,7 @@ package com.learning.springbootproject.repository;
 
 import com.learning.springbootproject.documents.Department;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+//import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

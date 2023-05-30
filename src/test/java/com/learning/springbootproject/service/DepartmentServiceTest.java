@@ -3,6 +3,7 @@ package com.learning.springbootproject.service;
 import com.learning.springbootproject.documents.Department;
 import com.learning.springbootproject.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ class DepartmentServiceTest {
 
     /* Mock Repository class since we are only
      * testing the Service layer. */
+
     @MockBean
     private DepartmentRepository departmentRepository;
 
@@ -40,6 +42,7 @@ class DepartmentServiceTest {
     }
 
     @Test
+    @DisplayName("Get data based on a valid IT name")
     public void whenValidDepartmentName_thenDepartmentShouldBeFound() throws Exception {
         String departmentName = "IT";
 
