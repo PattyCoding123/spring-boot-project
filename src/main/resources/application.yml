@@ -1,0 +1,8 @@
+welcome:
+  message: Hello, World! I am using a yaml file!
+
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_DATABASE_URI}
+      database: ${MONGO_DATABASE_NAME}
