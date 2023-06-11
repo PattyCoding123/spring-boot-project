@@ -52,7 +52,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Optional<Department> potentialDepDb = departmentRepository.findById(departmentId);
 
         if(potentialDepDb.isEmpty()) {
-            throw new DepartmentNotFoundException("The department you want to exist does not exist.");
+            throw new DepartmentNotFoundException("The department you want to edit does not exist.");
         }
 
         Department depDb = potentialDepDb.get();

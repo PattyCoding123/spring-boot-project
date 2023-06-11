@@ -32,7 +32,7 @@ public class DepartmentController {
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     /* @RequestBody means that the department variable will
-     * be transformed into a JSON object
+     * be a JSON object in the body of the request.
      *
      * @Valid will validate the Department parameter using
      * the annotations we provided in the Department class.  */
